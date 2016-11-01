@@ -1,7 +1,11 @@
 package passwordWindow;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.ListView;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 
@@ -9,17 +13,22 @@ import javax.swing.*;
 
 public class Controller {
 
-    int passSize = 0;
-    int randIntChar;
-    char alphabet[] = {' ', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k','l','m','n','o','p','q','r','s','t','u','v','w','x','y', 'z', '0','1','2','3','4','5','6','7','8','9'};
-    String password;
-    String test;
+    private int passSize = 0;
+    private int randIntChar;
+    private char alphabet[] = {' ', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k','l','m','n','o','p','q','r','s','t','u','v','w','x','y', 'z', '0','1','2','3','4','5','6','7','8','9'};
+    private String password;
+    private String test;
+    private ObservableList<String> data = FXCollections.observableArrayList();
 
     @FXML
     private TextField txtSize;
 
     @FXML
     private TextField txtPassword;
+
+
+    @FXML
+    private ListView<String> listSave;
 
 
 
@@ -30,19 +39,14 @@ public class Controller {
 
     public void clearPassword(ActionEvent event) {
         txtPassword.setText("");
-        /*System.out.println(alphabet.length);
-        System.out.println(alphabet[36]);
-        test = "";
-        for (int i = 1; i <= 26; i++) {
-            test += alphabet[i];
-        }
-        for (int j = 27; j < 53; j++) {
-            test += Character.toUpperCase(alphabet[j - 26]);
-        }
-        for (int k = 52; k < 62; k++) {
-            test += alphabet[k - 25];
-        }
-        txtPassword.setText(test);*/
+    }
+
+    public void savePassword(ActionEvent event) {
+
+
+        data.add(password);
+        //txtSave.appendText(password + "\n");
+        listSave.setItems(data);
     }
 
     public void createPassword(ActionEvent event) {
@@ -71,15 +75,7 @@ public class Controller {
 
         }
 
-        //for (int j = 27; j <= 52; j++) {
-            //if (j == 52) {
-            //    test += alphabet[j - 27];
-            //} else {
-            //    test += alphabet[j - 26];
-            //}
-        //}
-
         txtPassword.setText(password);
-        //txtTest.setText(test);
+
     }
 }
